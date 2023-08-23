@@ -10,7 +10,6 @@ type VersionInfo = {
   build: number;
 };
 
-type ObjectKey = keyof typeof VersionInfo;
 
 async function run(): Promise<void> {
   try {
