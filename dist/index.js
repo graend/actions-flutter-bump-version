@@ -56,8 +56,8 @@ const parseVersion = (version) => {
     const build = d[1];
     return {
         major: parseInt(semver[0]),
-        mminor: parseInt(semver[1]),
-        patch: parseInt(semver[3]),
+        minor: parseInt(semver[1]),
+        patch: parseInt(semver[2]),
         build: parseInt(build)
     };
 };
