@@ -15,18 +15,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
+const fs_1 = __nccwpck_require__(7147);
+const path_1 = __importDefault(__nccwpck_require__(1017)); // Import the 'path' module
 const yaml_1 = __nccwpck_require__(4083);
-const { promises: fs } = __nccwpck_require__(7147);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const bump = (0, core_1.getInput)('bump');
             (0, core_1.debug)(`Should bump ${bump}`);
-            const pubspecLocation = `${process.env.GITHUB_WORKSPACE}/pubspec.yaml}`;
+            console.log(`Should bump ${bump}`);
+            const pubspecLocation = path_1.default.join(process.env.GITHUB_WORKSPACE, 'pubspec.yaml');
             (0, core_1.debug)(`READING ${pubspecLocation}`);
-            const pubspec = yield fs.readFile(`${pubspecLocation}`, 'utf8');
+            console.log(`READING ${pubspecLocation}`);
+            const pubspec = yield fs_1.promises.readFile(`${pubspecLocation}`, 'utf8');
             (0, core_1.debug)(`Pubspec ${pubspec}`);
             const pubspecYaml = (0, yaml_1.parse)(pubspec);
             (0, core_1.debug)(`Pubspec parsed ${pubspecYaml}`);
