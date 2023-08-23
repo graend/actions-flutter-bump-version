@@ -1,11 +1,10 @@
-name: 'Your name here'
+name: 'Flutter version bump'
 description: 'Provide a description here'
-author: 'Your name or organization here'
+author: 'Mikko Levonmaa'
 inputs:
-  milliseconds: # change this
+  bump:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The version to bump'
 runs:
   using: 'node16'
   main: 'dist/index.js'
