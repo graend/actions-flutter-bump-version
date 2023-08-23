@@ -36,6 +36,7 @@ function run() {
             (0, core_1.debug)(`Pubspec ${pubspec}`);
             const pubspecYaml = (0, yaml_1.parse)(pubspec);
             (0, core_1.debug)(`Pubspec parsed ${pubspecYaml}`);
+            console.log(`Pubspec parsed ${pubspecYaml}`);
             (0, core_1.debug)(new Date().toTimeString());
         }
         catch (error) {

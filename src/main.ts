@@ -17,8 +17,9 @@ async function run(): Promise<void> {
 
     const pubspecYaml = parse(pubspec);
     debug(`Pubspec parsed ${pubspecYaml}`);
+    console.log(`Pubspec parsed ${pubspecYaml}`);
     debug(new Date().toTimeString())
-
+    
     
   } catch (error) {
     if (error instanceof Error) setFailed(error.message)
