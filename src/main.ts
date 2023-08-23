@@ -25,7 +25,7 @@ async function run(): Promise<void> {
     const currentVersion = pubspecYaml.version;
 
     const parsedVersionInfo = parseVersion(currentVersion);
-    console.log(`parsedVersionInfo ${parsedVersionInfo}`);
+    console.log(`parsedVersionInfo ${JSON.stringify(parsedVersionInfo)}`);
   } catch (error) {
     if (error instanceof Error) setFailed(error.message)
   }
@@ -36,10 +36,10 @@ const parseVersion =(version: string) => {
   const semver = d[0].split('.');
   const build = d[1];
   return {
-    major: semver[0],
-    mminor: semver[1],
-    patch: semver[3],
-    build: build
+    major: parseInt(semver[0]),
+    mminor: parseInt(semver[1]),
+    patch: parseInt(semver[3]),
+    build: parseInt(build)
   }
 }
 
