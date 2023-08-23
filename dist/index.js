@@ -26,9 +26,9 @@ const yaml_1 = __nccwpck_require__(4083);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const bump = (0, core_1.getInput)('bump');
-            (0, core_1.debug)(`Should bump ${bump}`);
-            console.log(`Should bump ${bump}`);
+            const bumpMe = (0, core_1.getInput)('bump');
+            (0, core_1.debug)(`Should bump ${bumpMe}`);
+            console.log(`Should bump ${bumpMe}`);
             const pubspecLocation = path_1.default.join(process.env.GITHUB_WORKSPACE, 'pubspec.yaml');
             (0, core_1.debug)(`READING ${pubspecLocation}`);
             console.log(`READING ${pubspecLocation}`);
@@ -43,6 +43,8 @@ function run() {
             const currentVersion = pubspecYaml.version;
             const parsedVersionInfo = parseVersion(currentVersion);
             console.log(`parsedVersionInfo ${JSON.stringify(parsedVersionInfo)}`);
+            const newVersionInfo = bump(bumpMe, parsedVersionInfo);
+            console.log(`newVersionInfo ${JSON.stringify(newVersionInfo)}`);
         }
         catch (error) {
             if (error instanceof Error)
@@ -60,6 +62,11 @@ const parseVersion = (version) => {
         patch: parseInt(semver[2]),
         build: parseInt(build)
     };
+};
+const bump = (key, version) => {
+    version[key] += 1;
+    version.build += 1;
+    return version;
 };
 run();
 

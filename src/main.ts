@@ -3,12 +3,20 @@ import { promises as fs } from 'fs';
 import path from 'path'; // Import the 'path' module
 import { parse } from 'yaml';
 
+type VersionInfo = {
+  major: number;
+  minor: number;
+  patch: number;
+  build: number;
+};
+
+type ObjectKey = keyof typeof VersionInfo;
 
 async function run(): Promise<void> {
   try {
-    const bump: string = getInput('bump');
-    debug(`Should bump ${bump}`);
-    console.log(`Should bump ${bump}`);
+    const bumpMe: string = getInput('bump');
+    debug(`Should bump ${bumpMe}`);
+    console.log(`Should bump ${bumpMe}`);
     const pubspecLocation = path.join(process.env.GITHUB_WORKSPACE!, 'pubspec.yaml');
     debug(`READING ${pubspecLocation}`);
     console.log(`READING ${pubspecLocation}`);
@@ -26,12 +34,16 @@ async function run(): Promise<void> {
 
     const parsedVersionInfo = parseVersion(currentVersion);
     console.log(`parsedVersionInfo ${JSON.stringify(parsedVersionInfo)}`);
+
+    const newVersionInfo = bump(bumpMe as keyof VersionInfo, parsedVersionInfo);
+    console.log(`newVersionInfo ${JSON.stringify(newVersionInfo)}`);
+
   } catch (error) {
     if (error instanceof Error) setFailed(error.message)
   }
 }
 
-const parseVersion =(version: string) => {
+const parseVersion =(version: string) :VersionInfo => {
   const d = version.split('+');
   const semver = d[0].split('.');
   const build = d[1];
@@ -41,6 +53,12 @@ const parseVersion =(version: string) => {
     patch: parseInt(semver[2]),
     build: parseInt(build)
   }
+}
+
+const bump = (key: keyof VersionInfo, version: VersionInfo) :VersionInfo => {
+  version[key] += 1;
+  version.build += 1;
+  return version;
 }
 
 run()
