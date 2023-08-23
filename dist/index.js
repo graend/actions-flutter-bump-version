@@ -40,6 +40,9 @@ function run() {
             (0, core_1.debug)(new Date().toTimeString());
             (0, core_1.debug)(`Pubspec version ${pubspecYaml.version}`);
             console.log(`Pubspec version ${pubspecYaml.version}`);
+            const currentVersion = pubspecYaml.version;
+            const parsedVersionInfo = parseVersion(currentVersion);
+            console.log(`parsedVersionInfo ${parsedVersionInfo}`);
         }
         catch (error) {
             if (error instanceof Error)
@@ -47,6 +50,17 @@ function run() {
         }
     });
 }
+const parseVersion = (version) => {
+    const d = version.split('+');
+    const semver = d[0].split('.');
+    const build = d[1];
+    return {
+        major: semver[0],
+        mminor: semver[1],
+        patch: semver[3],
+        build: build
+    };
+};
 run();
 
 
