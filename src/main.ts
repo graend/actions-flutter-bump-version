@@ -19,6 +19,8 @@ async function run(): Promise<void> {
     debug(`Pubspec parsed ${pubspecYaml}`);
     console.log(`Pubspec parsed ${pubspecYaml}`);
     debug(new Date().toTimeString())
+    debug(`Pubspec version ${pubspecYaml.version}`);
+    console.log(`Pubspec version ${pubspecYaml.version}`);
     
     
   } catch (error) {

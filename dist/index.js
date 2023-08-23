@@ -38,6 +38,8 @@ function run() {
             (0, core_1.debug)(`Pubspec parsed ${pubspecYaml}`);
             console.log(`Pubspec parsed ${pubspecYaml}`);
             (0, core_1.debug)(new Date().toTimeString());
+            (0, core_1.debug)(`Pubspec version ${pubspecYaml.version}`);
+            console.log(`Pubspec version ${pubspecYaml.version}`);
         }
         catch (error) {
             if (error instanceof Error)
