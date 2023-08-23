@@ -22,9 +22,24 @@ async function run(): Promise<void> {
     debug(`Pubspec version ${pubspecYaml.version}`);
     console.log(`Pubspec version ${pubspecYaml.version}`);
     
-    
+    const currentVersion = pubspecYaml.version;
+
+    const parsedVersionInfo = parseVersion(currentVersion);
+    console.log(`parsedVersionInfo ${parsedVersionInfo}`);
   } catch (error) {
     if (error instanceof Error) setFailed(error.message)
+  }
+}
+
+const parseVersion =(version: string) => {
+  const d = version.split('+');
+  const semver = d[0].split('.');
+  const build = d[1];
+  return {
+    major: semver[0],
+    mminor: semver[1],
+    patch: semver[3],
+    build: build
   }
 }
 
