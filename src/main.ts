@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { getInput, setFailed, setOutput } from '@actions/core';
 import { promises as fs } from 'fs';
 import path from 'path'; // Import the 'path' module
 import { Document, parse, stringify } from 'yaml';
@@ -28,6 +28,9 @@ async function run(): Promise<void> {
     const yaml = await loadYaml(pubspecLocation)
     const nextVersion = await incrementVersion(yaml, bumpMe)
     await replaceVersionInfoAndSave(pubspecLocation, nextVersion)
+
+    setOutput('NEXT_VERSION', versionInfoToString(nextVersion));
+    
   } catch (error) {
     if (error instanceof Error) setFailed(error.message)
   }

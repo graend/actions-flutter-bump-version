@@ -37,6 +37,7 @@ function run() {
             const yaml = yield (0, exports.loadYaml)(pubspecLocation);
             const nextVersion = yield (0, exports.incrementVersion)(yaml, bumpMe);
             yield (0, exports.replaceVersionInfoAndSave)(pubspecLocation, nextVersion);
+            (0, core_1.setOutput)('NEXT_VERSION', versionInfoToString(nextVersion));
         }
         catch (error) {
             if (error instanceof Error)
