@@ -84,9 +84,10 @@ const parseVersion = (version: string): VersionInfo => {
 }
 
 const bump = (key: keyof VersionInfo, version: VersionInfo): VersionInfo => {
-  version[key] += 1
-  version.build += 1
-  return version
+  const next = { ...version };
+  next[key] += 1;
+  next.build += 1;
+  return next;
 }
 
 const versionInfoToString = (version: VersionInfo): string => {
