@@ -55,6 +55,7 @@ exports.saveYaml = saveYaml;
 const incrementVersion = (yaml, bumpMe) => __awaiter(void 0, void 0, void 0, function* () {
     const versionInfo = parseVersion(yaml.get('version'));
     const nextVersion = bump(bumpMe, versionInfo);
+    console.log(`Bumping with ${bumpMe} from ${versionInfoToString(versionInfo)} to ${versionInfoToString(nextVersion)}`);
     return nextVersion;
 });
 exports.incrementVersion = incrementVersion;
