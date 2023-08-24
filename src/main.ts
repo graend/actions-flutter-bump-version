@@ -1,7 +1,7 @@
-import {getInput, setFailed} from '@actions/core'
-import {promises as fs} from 'fs'
-import path from 'path' // Import the 'path' module
-import {Document, parse, stringify} from 'yaml'
+import { getInput, setFailed } from '@actions/core';
+import { promises as fs } from 'fs';
+import path from 'path'; // Import the 'path' module
+import { Document, parse, stringify } from 'yaml';
 
 type VersionInfo = {
   major: number
@@ -46,7 +46,9 @@ export const incrementVersion = async (
   bumpMe: string
 ): Promise<VersionInfo> => {
   const versionInfo = parseVersion(yaml.get('version') as string)
+  
   const nextVersion = bump(bumpMe as keyof VersionInfo, versionInfo)
+  console.log(`Bumping with ${bumpMe} from ${versionInfoToString(versionInfo)} to ${versionInfoToString(nextVersion)}`)
   return nextVersion
 }
 
