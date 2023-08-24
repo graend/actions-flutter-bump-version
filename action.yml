@@ -1,0 +1,10 @@
+name: 'Flutter version bump'
+description: 'Provide a description here'
+author: 'Mikko Levonmaa'
+inputs:
+  bump:
+    required: true
+    description: 'The version to bump'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

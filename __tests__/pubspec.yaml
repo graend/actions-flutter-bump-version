@@ -1,0 +1,9 @@
+name: test_pubspec_to_parse
+# Some comment
+description: A test file
+publish_to: none
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.1 <3.0.0'
